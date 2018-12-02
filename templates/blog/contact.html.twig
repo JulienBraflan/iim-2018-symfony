@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br><br>
+    <div id="contactForm">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col">{{ form_row(form.sujet) }}</div>
+        </div>
+        <div class="row">
+            <div class="col">{{ form_row(form.email) }}</div>
+        </div>
+        <div class="row">
+            <div class="col">{{ form_row(form.message) }}</div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-group">
+            <button class="btn btn-primary">Envoyer</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
