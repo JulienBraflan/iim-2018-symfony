@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\ContactType;
-use App\Notification\ContactNotification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,8 +10,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\Article;
-use App\Entity\Contact;
 use App\Form\ArticleType;
+use App\Entity\Contact;
+
+
 
 class BlogController extends AbstractController
 {
@@ -107,22 +107,9 @@ class BlogController extends AbstractController
     /**
      * @Route("/contact", name="blog_contact")
      */
-    public function contact(Request $request, ContactNotification $notification) {
+    public function contact() {
 
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $notification->notify($contact);
-            $this->addFlash('success','Votre email a bien été envoyé');
-            return $this->redirectToRoute('blog');
-        }
-
-        return $this->render('blog/contact.html.twig', [
-            'form' => $form->createView()
-        ]);
+        return $this->render('blog/contact.html.twig');
     }
 
 }
